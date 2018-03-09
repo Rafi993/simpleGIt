@@ -23,14 +23,18 @@ exports.commandLine = args => {
     const slicedArgs = map(toLower, slice(2, 4, args))
     // Assign first user passed args which is sub-command to type
     res.type = slicedArgs[0]
-    
-    // Depending on sub-command pass it value
-    res.val = {
-      'init': slicedArgs[1] || ''
-    }[res.type]
 
-    if(res.val.length > 0){
-      res.val += '/'
+    // Depending on sub-command pass it value
+    switch (res.type) {
+      case 'init':
+        res.val = slicedArgs[1] || ''
+        if (res.val.length > 0) {
+          res.val += '/'
+        }
+        break;
+      default:
+        res.val = 'Unknown option';
+        res.type = 'error'
     }
 
   } else {
