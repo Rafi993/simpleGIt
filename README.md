@@ -1,2 +1,1 @@
-checkout
-git cat-file
+## Simple implementation of git
