@@ -21,18 +21,16 @@ exports.commandLine = args => {
 
     // Remove node path and file path from args and convert all args to lower case
     const slicedArgs = map(toLower, slice(2, 4, args))
-
     // Assign first user passed args which is sub-command to type
     res.type = slicedArgs[0]
-
+    
     // Depending on sub-command pass it value
     res.val = {
       'init': slicedArgs[1] || ''
-    }[res.type] || 'Unknown option'
+    }[res.type]
 
-    // If no option user give matches anything
-    if(res.val === 'Unknown option'){
-      res.type = 'error'
+    if(res.val.length > 0){
+      res.val += '/'
     }
 
   } else {
