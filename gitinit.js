@@ -10,10 +10,11 @@ const path = require('path')
 exports.init = repo => {
 
   // If repo name is given then a folder with that name is created
-  if (repo.length !== 0) {
+  if (repo.length > 0) {
     // The reason for the two sync functions is to initialize the repo only
     // if the directory is created
     // @shame: Try to remove sync functions later
+    console.log(repo)
     if (fse.existsSync(repo)) {
       console.log(chalk.yellow('\n The ' + repo + ' Directory already exist please try a new name'))
     } else {
@@ -33,12 +34,13 @@ exports.init = repo => {
   }
 
   // Check if folder is a git repo
-  if (fse.existsSync(repo + '/.git')) {
+  if (fse.existsSync(repo + '.git')) {
     console.log(chalk.yellow('It is already a git repo'))
   } else {
 
     // If it is not a git repo move files from GITFILES_INITIAL to .git directory
-    fse.copy(path.join(__dirname, '/GITFILES_INITIAL'), repo + '/.git', err => {
+    console.log(repo + '/.git')
+    fse.copy(path.join(__dirname, '/GITFILES_INITIAL'), repo + '.git', err => {
       if (err){
         console.log(err)
       } else{

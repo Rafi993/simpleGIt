@@ -13,7 +13,8 @@ const parsedArgs = commandLine(process.argv);
 // Executing handlers for respective sub-commands
 switch (parsedArgs.type) {
   case 'init':
-    gitinit(parsedArgs.val); break;
+      gitinit(parsedArgs.val);
+  break;
   case 'error':
     console.log(chalk.yellow(parsedArgs.val)) ;break;
 }
