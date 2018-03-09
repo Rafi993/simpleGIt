@@ -1,0 +1,21 @@
+{
+  "name": "sgit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo 'write tests'"
+  },
+  "bin": {
+   "sgit": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "fs-extra": "^5.0.0",
+    "ramda": "^0.25.0"
+  }
+}
