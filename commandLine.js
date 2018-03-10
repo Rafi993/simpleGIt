@@ -32,6 +32,8 @@ exports.commandLine = args => {
           res.val += '/'
         }
         break;
+      case 'add': res.val = slicedArgs[1] || ''; break;
+      case 'hash-object': res.val = slicedArgs[1] || ''; break;
       default:
         res.val = 'Unknown option';
         res.type = 'error'

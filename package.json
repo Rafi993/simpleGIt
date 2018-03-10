@@ -8,12 +8,13 @@
     "test": "echo 'write tests'"
   },
   "bin": {
-   "sgit": "./index.js"
+    "sgit": "./index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "blob-stream": "^0.1.3",
     "chalk": "^2.3.2",
     "fs-extra": "^5.0.0",
     "ramda": "^0.25.0"
