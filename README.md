@@ -1,19 +1,19 @@
 ## Simple implementation of git
 
 ### Commands to be implemented
-- [x] git init
-- [x] git add
-- [ ] git commit
-- [ ] git clone
-- [x] git hash-objects
-- [ ] git cat-file
-- [ ] git rm
-- [ ] git push
-- [ ] git branch
-- [ ] git tag
-- [ ] git checkout
-- [ ] git status
-- [ ] git log
+- [x] sgit init
+- [x] sgit add
+- [ ] sgit commit
+- [ ] sgit clone
+- [x] sgit hash-objects
+- [ ] sgit cat-file
+- [ ] sgit rm
+- [ ] sgit push
+- [ ] sgit branch
+- [ ] sgit tag
+- [ ] sgit checkout
+- [ ] sgit status
+- [ ] gsit log
 
 ## Other things to do
-- [] Prevent multiple git add of same file
+- [x] Prevent multiple git add of same file

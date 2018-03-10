@@ -1,10 +1,28 @@
 // lib imports
 const hash = require('crypto').createHash('sha1')
+const chalk = require('chalk')
 const fse = require('fs-extra')
 const {
   slice,
-  drop
+  drop,
+  join
 } = require('ramda')
+
+/**
+ * Creates object in .git/objects directory
+ * @param {String} path Location in which object is to be created
+ * @param {String} data Data to be written to the object
+ */
+const createObject = (path, data)=>{
+    fse.writeFile(path, data, err => {
+      if(err){
+        console.error('Unable to commit your file')
+    } else {
+      console.log(chalk.green('Your file has been commited '+ join('', drop(2, path.split('/')))))
+    }
+})
+
+}
 
 /**
  * It generates hash of given data and if write is true it writes it to file
@@ -31,13 +49,17 @@ exports.gitHashObject = (file, write = false) => {
         const hashVal = hash.digest('hex');
         const firstTwoChar = slice(0, 2, hashVal)
 
-        fse.mkdir('.git/objects/' + firstTwoChar)
-          .then(() => {
-            console.log('sdfsd', drop(2, hashVal))
-            fse.writeFile('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData, err => {
-              console.log(err)
-            })
-          })
+        fse.exists('.git/objects/' + firstTwoChar)
+        .then(fileExist=>{
+          if(!fileExist){
+            fse.mkdir('.git/objects/' + firstTwoChar)
+            .then(()=>{
+              createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+            }) 
+          } else {
+            createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+          }
+        })
 
         // returning hash value
         resolve(hashVal)
