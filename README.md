@@ -2,13 +2,18 @@
 
 ### Commands to be implemented
 - [x] git init
-- [ ] git add
+- [x] git add
 - [ ] git commit
 - [ ] git clone
-- [ ] git hash-objects
+- [x] git hash-objects
 - [ ] git cat-file
 - [ ] git rm
 - [ ] git push
 - [ ] git branch
 - [ ] git tag
 - [ ] git checkout
+- [ ] git status
+- [ ] git log
+
+## Other things to do
+- [] Prevent multiple git add of same file
