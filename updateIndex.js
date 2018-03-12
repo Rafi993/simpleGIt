@@ -10,6 +10,13 @@ const {
 
 exports.updateIndex = newIndexData => {
 
+  // If index file does not exist create it
+  if(!fse.existsSync('.git/index')){
+    fse.writeFile('.git/index', '', 'utf8', err=>{
+      console.log('Unable to add file to staging')
+    })
+  }
+
   // Read existing index
   fse.readFile('.git/index', 'utf8')
     .then(data => {

@@ -25,8 +25,8 @@ exports.init = repo => {
         fse.mkdirSync(repo)
       } catch (err) {
         if (err) {
-          conso.log('Unable to create directory ', repo)
-          console.error(e);
+          console.log('Unable to create directory ', repo)
+          console.error(err);
         }
       }
     }
