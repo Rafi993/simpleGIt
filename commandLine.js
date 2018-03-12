@@ -14,15 +14,16 @@ const {
  * with type and val if error type is returned as 'error'
  * @param {Array} args This is list of arguments passed as command line parameter
  */
-exports.commandLine = args => {
+exports.commandLine = (args = []) => {
+  console.log(args)
 
   const processArgs = argsArr => {
     const firstArg = argsArr[0] || '';
 
     const getSubCommand = {
-      'init': argsArr[1].length > 0 ? argsArr[1] + '/' : argsArr[1],
-      'add': argsArr[1],
-      'hash-object': argsArr[1],
+      'init': argsArr[1] !== undefined ? (argsArr.length > 0 ? argsArr[1] + '/' : argsArr[1]): '',
+      'add': argsArr[1] || 'error',
+      'hash-object': argsArr[1] || 'error',
       'commit': argsArr.length >= 3 ?
         // Check if the third argument is -m else thro error
         (argsArr[1] === '-m' ? [argsArr[1] || '', argsArr[2]] : 'error')
