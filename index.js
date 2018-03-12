@@ -14,11 +14,14 @@ const gitCommit = require('./gitcommit').gitCommit
 const parsedArgs = commandLine(process.argv);
 
 // Executing handlers for respective sub-commands
-switch (parsedArgs.type) {
-  case 'init': gitinit(parsedArgs.val); break;
-  case 'add': gitAdd(parsedArgs.val); break;
-  case 'hash-object': gitHashObject(parsedArgs.val); break;
-  case 'commit': gitCommit(parsedArgs.val); break;
-  case 'error':
-    console.log(chalk.yellow(parsedArgs.val)) ;break;
+const subCommands = {
+  'init': gitinit,
+  'add': gitAdd,
+  'hash-object': gitHashObject,
+  'commit': gitCommit,
+  'warn': warn=> console.log(chalk.yellow(warn)),
+  'error': err=> console.error(chalk.red(err))
 }
+
+// Executing sub-command
+subCommands[parsedArgs.type](parsedArgs.val)
