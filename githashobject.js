@@ -1,5 +1,5 @@
 // lib imports
-const hash = require('crypto').createHash('sha1')
+const hash = require('crypto')
 const chalk = require('chalk')
 const fse = require('fs-extra')
 const {
@@ -25,46 +25,64 @@ const createObject = (path, data)=>{
 }
 
 /**
+ * Creates Folder with first two characters of hash val and then calls createObject
+ * @param {String} hashVal Hash value of the object to be created
+ * @param {String} firstTwoChar First two characters of the hash
+ */
+const createFirstTwoCharFolder = (hashVal, cleanData)=>{
+  const firstTwoChar = slice(0, 2, hashVal)
+
+  // fse.exists('.git/objects/' + firstTwoChar)
+  // .then(fileExist=>{
+  //   if(!fileExist){
+  //     fse.mkdir('.git/objects/' + firstTwoChar)
+  //     .then(()=>{
+  //       createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+  //     }) 
+  //   } else {
+  //     createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+  //   }
+  // })
+}
+
+/**
  * It generates hash of given data and if write is true it writes it to file
  * @param {Object} data Content to be hashed
  * @param {Boolean} write Should it write hash to file
  */
-exports.gitHashObject = (file, write = false) => {
+exports.gitHashObject = (file, write = false, data = '') => {
   return new Promise((resolve, reject) => {
 
-    // creating read stream
-    stream = fse.createReadStream(file);
-    let cleanData = '';
+    const sha1 = hash.createHash('sha1')
 
-    stream.on('data', data => {
-      cleanData += data
-      hash.update(data, 'utf8')
-    })
+    if(file.length !== 0){
+      // creating read stream
+      stream = fse.createReadStream(file);
+      let cleanData = '';
 
-    stream.on('end', () => {
-      if (!write) {
-        // writing to console if write mode is false
-        console.log(file + ' ' + hash.digest('hex'))
-      } else {
-        const hashVal = hash.digest('hex');
-        const firstTwoChar = slice(0, 2, hashVal)
+      stream.on('data', data => {
+        cleanData += data
+        sha1.update(data, 'utf8')
+      })
 
-        fse.exists('.git/objects/' + firstTwoChar)
-        .then(fileExist=>{
-          if(!fileExist){
-            fse.mkdir('.git/objects/' + firstTwoChar)
-            .then(()=>{
-              createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
-            }) 
-          } else {
-            createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
-          }
-        })
+      stream.on('end', () => {
+        if (!write) {
+          // writing to console if write mode is false
+          console.log(file + ' ' + sha1.digest('hex'))
+        } else {
+          const hashVal = sha1.digest('hex');
 
-        // returning hash value
-        resolve(hashVal)
-      }
-    })
+          createFirstTwoCharFolder(hashVal, cleanData)
 
+          // returning hash value
+          resolve(hashVal)
+        }
+      })
+    } else {
+      // If content is passed instead of fileName
+      const hashVal = sha1.update(data, 'utf8').digest('hex')
+      createFirstTwoCharFolder(hashVal, data)
+      resolve(hashVal)
+    }
   })
 }
