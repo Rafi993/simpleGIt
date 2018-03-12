@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 // Lib imports
-const commandLine = require('./commandLine').commandLine;
 const chalk = require('chalk')
 
 // Local imports
 const gitinit = require('./gitinit').init;
 const gitAdd = require('./gitadd').add;
+const commandLine = require('./commandLine').commandLine;
 const gitHashObject = require('./githashobject').gitHashObject
 const gitCommit = require('./gitcommit').gitCommit
 
