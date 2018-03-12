@@ -1,7 +1,8 @@
 const {
   slice,
   toLower,
-  map
+  map,
+  drop
 } = require('ramda')
 
 /**
@@ -20,10 +21,11 @@ exports.commandLine = args => {
   if (args.length > 2) {
 
     // Remove node path and file path from args and convert all args to lower case
-    const slicedArgs = map(toLower, slice(2, 4, args))
+    const slicedArgs = map(toLower, drop(2, args))
     // Assign first user passed args which is sub-command to type
     res.type = slicedArgs[0]
 
+    // @shame comeup with better way to parse args without or switch
     // Depending on sub-command pass it value
     switch (res.type) {
       case 'init':
@@ -34,6 +36,15 @@ exports.commandLine = args => {
         break;
       case 'add': res.val = slicedArgs[1] || ''; break;
       case 'hash-object': res.val = slicedArgs[1] || ''; break;
+      case 'commit':
+        if(slicedArgs.length >= 3) {
+          if(slicedArgs[1] === '-m') {
+            res.val = [ slicedArgs[1] || '', slicedArgs[2]]
+          }
+        } else {
+          res.type = 'error'
+          res.val = 'Not enough arguments'
+        }; break;
       default:
         res.val = 'Unknown option';
         res.type = 'error'
