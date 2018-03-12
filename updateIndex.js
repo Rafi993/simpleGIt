@@ -26,7 +26,8 @@ exports.updateIndex = newIndexData => {
       newIndexData.mode + ' ' +
       newIndexData.hash)
 
-      fse.writeFile('.git/index', index, err => {
+      console.log(index)
+      fse.writeFile('.git/index', join('\r\n', index), err => {
         if (err) {
           console.log(chalk.red('Error in staging ' + newIndexData.fileName))
         } else {
