@@ -17,11 +17,13 @@ exports.commandLine = args => {
     val: '',
   }
 
-  // Check if user has passed any params since first arg is node path, second one is file path
-  if (args.length > 2) {
+  // Remove node path and file path from args and convert all args to lower case
+  const slicedArgs = map(toLower, drop(2, args))
 
-    // Remove node path and file path from args and convert all args to lower case
-    const slicedArgs = map(toLower, drop(2, args))
+  // Check if user has passed any params since first arg is node path, second one is file path
+  if (slicedArgs.length > 0) {
+
+
     // Assign first user passed args which is sub-command to type
     res.type = slicedArgs[0]
 
