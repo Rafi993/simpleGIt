@@ -1,4 +1,5 @@
 ## Simple implementation of git
+This is a simple implementation I built so that I could learn how git works internally.
 
 ### Commands to be implemented
 - [x] sgit init
@@ -17,3 +18,7 @@
 
 ## Other things to do
 - [x] Prevent multiple git add of same file
+- [ ] Fix and remove all `@shame` from code
+- [ ] Add w option to sgit hash-objects
+- [ ] Use binary blobs instead of regular files
+- [ ] Use zlib for compressing binary blobs
