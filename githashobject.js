@@ -32,17 +32,17 @@ const createObject = (path, data)=>{
 const createFirstTwoCharFolder = (hashVal, cleanData)=>{
   const firstTwoChar = slice(0, 2, hashVal)
 
-  // fse.exists('.git/objects/' + firstTwoChar)
-  // .then(fileExist=>{
-  //   if(!fileExist){
-  //     fse.mkdir('.git/objects/' + firstTwoChar)
-  //     .then(()=>{
-  //       createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
-  //     }) 
-  //   } else {
-  //     createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
-  //   }
-  // })
+  fse.exists('.git/objects/' + firstTwoChar)
+  .then(fileExist=>{
+    if(!fileExist){
+      fse.mkdir('.git/objects/' + firstTwoChar)
+      .then(()=>{
+        createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+      }) 
+    } else {
+      createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+    }
+  })
 }
 
 /**
@@ -50,7 +50,7 @@ const createFirstTwoCharFolder = (hashVal, cleanData)=>{
  * @param {Object} data Content to be hashed
  * @param {Boolean} write Should it write hash to file
  */
-exports.gitHashObject = (file, write = false, data = '') => {
+exports.gitHashObject = (file, write = true, data = '') => {
   return new Promise((resolve, reject) => {
 
     const sha1 = hash.createHash('sha1')
