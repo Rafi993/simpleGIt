@@ -43,6 +43,9 @@ const createFirstTwoCharFolder = (hashVal, cleanData)=>{
       createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
     }
   })
+  .catch(err=>{
+    console.log('Unable to commit your files')
+  })
 }
 
 /**
@@ -81,7 +84,6 @@ exports.gitHashObject = (file, write = true, data = '') => {
     } else {
       // If content is passed instead of fileName
       const hashVal = sha1.update(data, 'utf8').digest('hex')
-      createFirstTwoCharFolder(hashVal, data)
       resolve(hashVal)
     }
   })
