@@ -17,9 +17,9 @@ This is a simple implementation I built so that I could learn how git works inte
 - [ ] gsit log
 
 ## Other things to do
-- [x] Unit tests for gitinit
 - [x] make .git folder hidden
 - [ ] Fix and remove `@shame` from gitinit.js
 - [ ] Add w option to sgit hash-objects
 - [ ] Use binary blobs instead of regular files
 - [ ] Use zlib for compressing binary blobs
+- [ ] Ability to ignore files in .gitignore
