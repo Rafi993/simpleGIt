@@ -8,5 +8,4 @@ exports.gitCommit = message=>{
   
   // Create set of tree object that represent current state of index
   let tree = createTreeObj();
-
 }

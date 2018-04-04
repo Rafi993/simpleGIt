@@ -32,15 +32,15 @@ const createObject = (path, data)=>{
 const createFirstTwoCharFolder = (hashVal, cleanData)=>{
   const firstTwoChar = slice(0, 2, hashVal)
 
-  fse.exists('.git/objects/' + firstTwoChar)
+  fse.exists(`.git/objects/${firstTwoChar}`)
   .then(fileExist=>{
     if(!fileExist){
-      fse.mkdir('.git/objects/' + firstTwoChar)
+      fse.mkdir(`.git/objects/${firstTwoChar}`)
       .then(()=>{
-        createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+        createObject(`.git/objects/${firstTwoChar}/${drop(2, hashVal)}`, cleanData)
       }) 
     } else {
-      createObject('.git/objects/' + firstTwoChar + '/' + drop(2, hashVal), cleanData)
+      createObject(`.git/objects/${firstTwoChar}/${drop(2, hashVal)}`, cleanData)
     }
   })
   .catch(err=>{
@@ -71,7 +71,7 @@ exports.gitHashObject = (file, write = true, data = '') => {
       stream.on('end', () => {
         if (!write) {
           // writing to console if write mode is false
-          console.log(file + ' ' + sha1.digest('hex'))
+          console.log(`${file} ${sha1.digest('hex')}`)
         } else {
           const hashVal = sha1.digest('hex');
 

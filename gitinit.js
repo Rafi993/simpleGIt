@@ -16,7 +16,7 @@ exports.init = repo => {
     // if the directory is created
     // @shame: Try to remove sync functions later
     if (fse.existsSync(repo)) {
-      console.log(chalk.yellow('\n The ' + repo + ' Directory already exist please try a new name'))
+      console.log(chalk.yellow(`\n The ${repo} Directory already exist please try a new name`))
     } else {
 
       console.log('creating directory', chalk.blue(repo))
@@ -48,7 +48,7 @@ exports.init = repo => {
           hidden: true
         }, err => {
           if (err == null) {
-            console.log(chalk.green('Repo ' + repo + ' has been initialized'))
+            console.log(chalk.green(`Repo ${repo} has been initialized`))
           }
         });
       }

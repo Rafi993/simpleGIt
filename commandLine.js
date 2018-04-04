@@ -15,7 +15,7 @@ const {
  * @param {Array} args This is list of arguments passed as command line parameter
  */
 exports.commandLine = (args = []) => {
-  console.log(args)
+
 
   const processArgs = argsArr => {
     const firstArg = argsArr[0] || '';
