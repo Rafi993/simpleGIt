@@ -23,6 +23,7 @@ exports.commandLine = (args = []) => {
     const getSubCommand = {
       'init': argsArr[1] !== undefined ? (argsArr.length > 0 ? argsArr[1] + '/' : argsArr[1]): '',
       'add': argsArr[1] || 'error',
+      'rm':  argsArr[1] || 'error',
       'hash-object': argsArr[1] || 'error',
       'commit': argsArr.length >= 3 ?
         // Check if the third argument is -m else thro error

@@ -8,7 +8,7 @@ const {
   join  
 } = require('ramda')
 
-exports.updateIndex = newIndexData => {
+exports.updateIndex = (newIndexData, remove) => {
 
   // If index file does not exist create it
   if(!fse.existsSync('.git/index')){
@@ -27,11 +27,13 @@ exports.updateIndex = newIndexData => {
       // Removing empty record and duplicated
       const withoutDuplicates = reject(x=> x[0] === newIndexData.fileName, map(split(' '), reject(isEmpty, index)))
 
-      // Adding new entry
-      index = map(join(' '), withoutDuplicates)
-      index.push(newIndexData.fileName + '  ' +
-      newIndexData.mode + ' ' +
-      newIndexData.hash)
+      if(!remove) {
+        // Adding new entry
+        index = map(join(' '), withoutDuplicates)
+        index.push(newIndexData.fileName + '  ' +
+        newIndexData.mode + ' ' +
+        newIndexData.hash)
+      }
 
       fse.writeFile('.git/index', join('\r\n', index), err => {
         if (err) {

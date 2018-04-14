@@ -8,7 +8,7 @@ This is a simple implementation I built so that I could learn how git works inte
 - [ ] sgit clone
 - [x] sgit hash-objects
 - [ ] sgit cat-file
-- [ ] sgit rm
+- [x] sgit rm
 - [ ] sgit push
 - [ ] sgit branch
 - [ ] sgit tag

@@ -6,6 +6,7 @@ const chalk = require('chalk')
 // Local imports
 const gitinit = require('./gitinit').init;
 const gitAdd = require('./gitadd').add;
+const gitRm = require('./gitrm').rm;
 const commandLine = require('./commandLine').commandLine;
 const gitHashObject = require('./githashobject').gitHashObject
 const gitCommit = require('./gitcommit').gitCommit
@@ -17,6 +18,7 @@ const parsedArgs = commandLine(process.argv);
 const subCommands = {
   'init': gitinit,
   'add': gitAdd,
+  'add': gitRm,
   'hash-object': gitHashObject,
   'commit': gitCommit,
   'warn': warn=> console.log(chalk.yellow(warn)),
