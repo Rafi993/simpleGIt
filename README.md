@@ -22,4 +22,4 @@ This is a simple implementation I built so that I could learn how git works inte
 - [ ] Add w option to sgit hash-objects
 - [ ] Use binary blobs instead of regular files
 - [ ] Use zlib for compressing binary blobs
-- [ ] Ability to ignore files in .gitignore
+- [x] Ability to ignore files in .gitignore
